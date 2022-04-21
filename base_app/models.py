@@ -594,3 +594,5 @@ class probation(models.Model):
     stopdate = models.DateField(auto_now_add=False, auto_now=False,  null=True, blank=True)
     renewdate=models.DateField(auto_now_add=False, auto_now=False,  null=True, blank=True)
     status = models.IntegerField(default=0)
+    class Meta:
+     get_latest_by = ['status']

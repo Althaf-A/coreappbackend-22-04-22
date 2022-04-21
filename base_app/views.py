@@ -12127,10 +12127,14 @@ def probation_stop(request):
     return render(request, 'probation.html', {'msg_success':msg_success})
 
 def probation_renew(request):  
-    var = probation()  
+    id = request.GET.get('id')
+    var = probation.objects.filter(status=1,user_id=id).latest() 
+    alt = var.stopdate
+    print(alt)
+    akm = datetime.now().date()
+    var.extension = (akm-alt).days
     var.status= 0
     var.renewdate=datetime.now() 
-    id = request.GET.get('id')
     var.user_id=id
     var.save()  
     msg_success="renew succesfully"
