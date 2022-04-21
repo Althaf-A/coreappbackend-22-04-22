@@ -12116,13 +12116,14 @@ def probations(request):
 
 
 def probation_stop(request):  
-    var = probation()  
+    id = request.GET.get('id')
+    var = probation.objects.filter(status=0,user_id=id).latest()   
     var.reason = request.POST['stop_reason'] 
     var.status= 1
-    var.stopdate=datetime.now() 
-    id = request.GET.get('id')
-    var.user_id=id
+    var.stopdate=datetime.now()
+    var.user_id=id 
     var.save()  
+    print(var)
     msg_success="stoped succesfully"
     return render(request, 'probation.html', {'msg_success':msg_success})
 

@@ -596,3 +596,4 @@ class probation(models.Model):
     status = models.IntegerField(default=0)
     class Meta:
      get_latest_by = ['status']
+     
